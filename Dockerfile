@@ -18,5 +18,5 @@ EXPOSE 80
 
 FROM dunglas/frankenphp
 
-RUN apk add --no-cache php-mysqli \
-    && docker-php-ext-install mysqli
+RUN docker-php-ext-install mysqli
+
