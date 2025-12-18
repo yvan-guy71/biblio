@@ -15,3 +15,8 @@ RUN chown -R www-data:www-data /var/www/html/
 
 # Expose port 80
 EXPOSE 80
+
+FROM dunglas/frankenphp
+
+RUN apk add --no-cache php-mysqli \
+    && docker-php-ext-install mysqli
