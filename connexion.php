@@ -1,28 +1,21 @@
 <?php
-// Si Railway fournit DATABASE_URL, on l'utilise
 $database_url = getenv('DATABASE_URL');
-
-if ($database_url) {
-    $url_parts = parse_url($database_url);
-    $host = $url_parts['host'];
-    $user = $url_parts['user'];
-    $password = $url_parts['pass'];
-    $db = ltrim($url_parts['path'], '/');
-    $port = $url_parts['port'];
-} else {
-    // Sinon on utilise les variables Railway classiques
-    $host = getenv("DB_HOST") ?: "localhost";
-    $user = getenv("DB_USER") ?: "root";
-    $password = getenv("DB_PASSWORD") ?: "";
-    $db = getenv("DB_NAME") ?: "book_store";
-    $port = getenv("DB_PORT") ?: 3306;
+if (!$database_url) {
+    die("DATABASE_URL non défini.");
 }
 
-$con = mysqli_init();
-$con->options(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, false);
-$con->real_connect($host, $user, $password, $db, $port);
+$url_parts = parse_url($database_url);
+$host = $url_parts['host'];
+$user = $url_parts['user'];
+$password = $url_parts['pass'];
+$db = ltrim($url_parts['path'], '/');
+$port = $url_parts['port'];
 
-if ($con->connect_error) {
-    die("Erreur de connexion: " . $con->connect_error);
+try {
+    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$db", $user, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connexion réussie avec PDO 🚀";
+} catch (PDOException $e) {
+    die("Erreur PDO : " . $e->getMessage());
 }
 ?>
