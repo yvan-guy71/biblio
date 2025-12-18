@@ -11,7 +11,7 @@ $port = $url_parts['port'] ?? 3306;
 
 $con = mysqli_init();
 $con->options(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, false);
-$con->real_connect($host, $user, $password, $db, $port);
+$con->real_connect($database_url);
 
 if ($con->connect_error) {
     die("Erreur de connexion: " . $con->connect_error);
