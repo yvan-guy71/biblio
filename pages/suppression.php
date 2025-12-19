@@ -1,6 +1,6 @@
 <?php
-include 'inc/check_admin.php';
-include 'connexion.php';
+include '../inc/check_admin.php';
+include '../inc/connexion.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];
     $auteur = $_POST['Auteur'];

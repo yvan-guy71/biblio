@@ -1,6 +1,6 @@
 <?php 
-include 'inc/check_admin.php';
-include 'connexion.php';
+include '../inc/check_admin.php';
+include '../inc/connexion.php';
 $id = $_GET['id'];
 $sql = "SELECT * FROM livres WHERE id = $id";
 $result = $con->query($sql);
@@ -13,7 +13,7 @@ $result = $con->query($sql);
     <title>Edition du livre</title>
 </head>
 <body>
-    <?php include 'inc/header.php'; ?>
+    <?php include '../inc/header.php'; ?>
     <h1>Modifier le livre</h1>
     <?php
     if ($result->num_rows > 0) {
@@ -42,6 +42,6 @@ $result = $con->query($sql);
     }
     ?>
 
-<?php include 'inc/footer.php'; ?>
+<?php include '../inc/footer.php'; ?>
 </body>
 </html>

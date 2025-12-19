@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <?php include 'inc/header.php'; ?>
+    <?php include '../inc/header.php'; ?>
     <?php
-include 'inc/check_admin.php';
-include 'connexion.php';
+include '../inc/check_admin.php';
+include '../inc/connexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];
@@ -32,6 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 $con->close();
 ?>
-<?php include 'inc/footer.php'; ?>
+<?php include '../inc/footer.php'; ?>
 </body>
 </html>

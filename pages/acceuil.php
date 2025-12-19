@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <?php
         session_start();
-        include 'connexion.php';
+        include '../inc/connexion.php';
         $userDisplayName = '';
         if (!empty($_SESSION['user_id'])) {
             $uid = $_SESSION['user_id'];
@@ -125,18 +125,18 @@
 <body>
 <section>
     <header>
-        <div class="container"><a href="acceuil.php"><strong>LibraNum</strong></a>
+        <div class="container"><a href="../pages/acceuil.php"><strong>LibraNum</strong></a>
         <nav>
             <button class="menu-toggle" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </button>
             <ul id="menu" class="menu">
-                <li><a href="acceuil.php">Accueil</a></li>
+                <li><a href="../pages/acceuil.php">Accueil</a></li>
                 <li><a href="#about">A propos</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <?php if (!empty($userDisplayName)): ?>
-                    <li><a href="wishlist.php">Liste de souhaits</a></li>
-                    <li><a href="logout.php">Déconnexion</a></li>
+                    <li><a href="../pages/wishlist.php">Liste de souhaits</a></li>
+                    <li><a href="../pages/logout.php">Déconnexion</a></li>
                 <?php else: ?>
                     <li><a href="login.php#login-box">Connexion</a></li>
                     <li><a href="login.php#register">Inscription</a></li>
@@ -155,7 +155,7 @@
     <div class="underline"></div>
 <div class="grid-container">
     <?php
-include 'connexion.php';
+include '../inc/connexion.php';
 $sql = "SELECT * FROM livres";
 $result = $con->query($sql);
 if ($result->num_rows > 0) {
@@ -204,7 +204,7 @@ if ($result->num_rows > 0) {
 <footer>
     <div class="footer-content">
         <ul class="menu">
-            <li><a href="acceuil.php">Accueil</a></li>
+            <li><a href="../pages/acceuil.php">Accueil</a></li>
             <li><a href="#about">A propos</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>

@@ -1,5 +1,5 @@
 <?php
-include 'connexion.php';
+include 'inc/connexion.php';
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 ?>
@@ -14,7 +14,7 @@ error_reporting(E_ALL);
 <body>
     <?php include 'inc/header.php'; ?>
     <h1>Enrégistrer un livre</h1>
-    <form action="insert.php" method="post">
+    <form action="pages/insert.php" method="post">
         <label for="Auteur">Auteur:</label><br>
         <input type="text" name="Auteur" required><br>
         <label for="Titre">Titre:</label><br>

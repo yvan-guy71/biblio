@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authentification</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <style>
         body { font-family: Arial, sans-serif; }
         .center-wrap { display:flex; align-items:center; justify-content:center; min-height:80vh; }
@@ -32,7 +32,7 @@
     </style>
 </head>
 <body>
-    <?php include 'inc/header.php'; ?>
+    <?php include '../inc/header.php'; ?>
     <?php
 // messages par défaut
 $message = '';

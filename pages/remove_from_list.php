@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'connexion.php';
+include '../inc/connexion.php';
 
 if (empty($_SESSION['user_id'])) {
     header('Location: login.php');

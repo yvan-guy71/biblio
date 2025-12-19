@@ -18,18 +18,18 @@ if (!empty($_SESSION['user_id'])) {
 }
 ?>
 <header>
-    <div class="container"><a href="acceuil.php"><strong>LibraNum</strong></a>
+    <div class="container"><a href="../pages/acceuil.php"><strong>LibraNum</strong></a>
     <nav>
         <button class="menu-toggle" id="menu-toggle">
             <i class="fas fa-bars"></i>
         </button>
         <ul id="menu" class="menu">
-            <li><a href="acceuil.php">Accueil</a></li>
+            <li><a href="../pages/acceuil.php">Accueil</a></li>
             <li><a href="#about">A propos</a></li>
             <li><a href="#contact">Contact</a></li>
             <?php if (!empty($userDisplayName)): ?>
-                <li><a href="wishlist.php">Liste de souhaits</a></li>
-                <li><a href="logout.php">Déconnexion</a></li>
+                <li><a href="../pages/wishlist.php">Liste de souhaits</a></li>
+                <li><a href="../pages/logout.php">Déconnexion</a></li>
             <?php else: ?>
                 <li><a href="login.php#login-box">Connexion</a></li>
                 <li><a href="login.php#register">Inscription</a></li>

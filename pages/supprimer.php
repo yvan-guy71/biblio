@@ -1,7 +1,7 @@
 <?php
-include 'inc/check_admin.php';
-include 'connexion.php';
-include 'connexion.php';
+include '../inc/check_admin.php';
+include '../inc/connexion.php';
+include '../inc/connexion.php';
 $id = $_GET['id'];
 $sql = "DELETE FROM livres WHERE id = $id";
 $result = $con->query($sql);
@@ -20,7 +20,7 @@ if ($con->query($sql) === TRUE) {
     <title>Suppression du Livre</title>
 </head>
 <body>
-    <?php include 'inc/header.php'; ?>
+    <?php include '../inc/header.php'; ?>
     <h1>Suppression du livre</h1>
     <?php
     if ($result->num_rows > 0) {
@@ -38,6 +38,6 @@ if ($con->query($sql) === TRUE) {
         echo "Aucun livre trouvé";
     }
     ?>
-<?php include 'inc/footer.php'; ?>
+<?php include '../inc/footer.php'; ?>
 </body>
 </html>

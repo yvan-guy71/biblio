@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Détails du livre</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
     p {
@@ -36,9 +36,9 @@ img {
     </style>
 </head>
 <body>
-    <?php include 'inc/header.php'; ?>
+    <?php include '../inc/header.php'; ?>
 <?php 
-include 'connexion.php';
+include '../inc/connexion.php';
 $userDisplayName = '';
 if (!empty($_SESSION['prenom']) || !empty($_SESSION['nom'])) {
     $userDisplayName = trim(($_SESSION['prenom'] ?? '') . ' ' . ($_SESSION['nom'] ?? ''));
@@ -68,6 +68,6 @@ if ($result->num_rows > 0) {
     echo "Aucun livre trouvé";
 }
 ?>
-<?php include 'inc/footer.php'; ?>
+<?php include '../inc/footer.php'; ?>
 </body>
 </html>

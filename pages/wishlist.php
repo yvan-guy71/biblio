@@ -1,5 +1,5 @@
 <?php
-include 'connexion.php';
+include '../inc/connexion.php';
 session_start();
 if (empty($_SESSION['user_id'])) {
     header('Location: login.php');
@@ -34,7 +34,7 @@ $stmt->close();
 <head>
     <meta charset="utf-8">
     <title>Ma Liste de Lecture</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <style>
         th, td {
             padding: 8px 12px;
@@ -49,7 +49,7 @@ $stmt->close();
     </style>
 </head>
 <body>
-<?php include 'inc/header.php'; ?>
+<?php include '../inc/header.php'; ?>
 <h1 style="text-align:center;margin-top:18px">Ma Liste de Lecture</h1>
 <?php if (empty($wishlist_books)): ?>
     <p style="text-align:center">Votre liste est vide.</p>

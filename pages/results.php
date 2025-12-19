@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Résultat de la recherche</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
 .affichage {
@@ -50,9 +50,9 @@ img {
 </style>
 </head>
 <body>
-    <?php include 'inc/header.php'; ?>
+    <?php include '../inc/header.php'; ?>
 <?php
-include 'connexion.php';
+include '../inc/connexion.php';
 
 if (isset($_GET['q']) && !empty($_GET['q'])) {
 
@@ -86,6 +86,6 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
     echo "<p style='text-align:center;'>Veuillez entrer un mot-clé pour rechercher.</p>";
 }
 ?>
-<?php include 'inc/footer.php'; ?>
+<?php include '../inc/footer.php'; ?>
 </body>
 </html>

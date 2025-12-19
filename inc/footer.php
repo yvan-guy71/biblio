@@ -1,7 +1,7 @@
 <footer>
     <div class="footer-content">
         <ul class="menu">
-            <li><a href="acceuil.php">Accueil</a></li>
+            <li><a href="../pages/acceuil.php">Accueil</a></li>
             <li><a href="#about">A propos</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>

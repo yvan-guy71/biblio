@@ -1,6 +1,6 @@
 <?php
-include 'connexion.php';
-include 'inc/check_admin.php';
+include '../inc/connexion.php';
+include '../inc/check_admin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +8,7 @@ include 'inc/check_admin.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>liste des livres</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <style>
         table {
             width: 100%;
@@ -33,7 +33,7 @@ include 'inc/check_admin.php';
     </style>
 </head>
 <body>
-    <?php include 'inc/header.php'; ?>
+    <?php include '../inc/header.php'; ?>
     <h1>Listes de livres</h1>
     <table border="1">
         <thead>
@@ -78,7 +78,7 @@ include 'inc/check_admin.php';
         }
         ?>
     </table><br>
-    <button><a href="index.php">Ajouter un Livre</a></button>
+    <button><a href="../index.php">Ajouter un Livre</a></button>
     <style>
         table {
             width: 100%;
@@ -96,6 +96,6 @@ include 'inc/check_admin.php';
             color: black;
         }
     </style>
-<?php include 'inc/footer.php'; ?>
+<?php include '../inc/footer.php'; ?>
 </body>
 </html>
