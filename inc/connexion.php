@@ -14,7 +14,6 @@ $port = $url_parts['port'];
 try {
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$db", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connexion réussie avec PDO 🚀";
 } catch (PDOException $e) {
     die("Erreur PDO : " . $e->getMessage());
 }
