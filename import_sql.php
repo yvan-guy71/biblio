@@ -1,15 +1,26 @@
 <?php
-$database_url = getenv('DATABASE_URL');
-if (!$database_url) {
-    die("DATABASE_URL non défini.");
-}
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "book_store";
+$port = 3306;
 
-$url_parts = parse_url($database_url);
-$host = $url_parts['host'];
-$user = $url_parts['user'];
-$password = $url_parts['pass'];
-$db = ltrim($url_parts['path'], '/');
-$port = $url_parts['port'];
+if (getenv('DATABASE_URL')) {
+    $url_parts = parse_url(getenv('DATABASE_URL'));
+    $host = $url_parts['host'];
+    $user = $url_parts['user'];
+    $password = $url_parts['pass'];
+    $db = ltrim($url_parts['path'], '/');
+    $port = $url_parts['port'];
+} elseif (getenv('MYSQLHOST')) {
+    $host = getenv('MYSQLHOST');
+    $user = getenv('MYSQLUSER');
+    $password = getenv('MYSQLPASSWORD');
+    $db = getenv('MYSQLDATABASE');
+    $port = getenv('MYSQLPORT');
+} else {
+    die("Aucune configuration de base de données trouvée (DATABASE_URL ou MYSQLHOST).");
+}
 
 $con = new mysqli($host, $user, $password, $db, $port);
 if ($con->connect_error) {
