@@ -57,7 +57,7 @@ if ($result->num_rows > 0) {
             echo "<strong>Maison d'édition : </strong> ". htmlspecialchars($row['maison_edition']) . "<br><br>";
             echo "<strong>Nombre d'exemplaires : </strong> ". htmlspecialchars($row['nombre_exemplaire']) . "<br>";
             echo "<br>";
-            echo "<img src='images/" . htmlspecialchars($row['image']) . "' alt='Image' width='100' style='margin-top:10px;'><br>";
+            echo "<img src='../images/" . htmlspecialchars($row['image']) . "' alt='Image' width='100' style='margin-top:10px;'><br>";
             echo "<form method=\"post\" action=\"add_to_list.php\" style=\"margin-top:10px;\">";
             echo "<input type=\"hidden\" name=\"livre_id\" value=\"" . (int)$row['id'] . "\">";
             echo "<button type=\"submit\">Ajouter à ma liste</button>";

@@ -75,7 +75,7 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
             echo "<strong>Auteur : </strong> ". htmlspecialchars($row['auteur']) . "<br><br>";
             echo "<strong>Description : </strong> ". htmlspecialchars($row['description']);
             echo "<br><br><span>Image <br></span>";
-            echo "<img src='images/" . htmlspecialchars($row['image']) . "' alt='Image' width='100' style='margin-top:10px;'><br>";
+            echo "<img src='../images/" . htmlspecialchars($row['image']) . "' alt='Image' width='100' style='margin-top:10px;'><br>";
             echo "</div>";
             echo '<a href="details.php?id=' . $row['id'] . '" class="btn-details">Détails du livre</a>';
         }

@@ -1,7 +1,7 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
 // ensure DB connection available
-if (!isset($con)) include __DIR__ . '/../connexion.php';
+if (!isset($con)) include __DIR__ . '/connexion.php';
 $userDisplayName = '';
 if (!empty($_SESSION['user_id'])) {
     $uid = (int)$_SESSION['user_id'];

@@ -62,7 +62,7 @@ include '../inc/check_admin.php';
                 echo "<td>" . htmlspecialchars($row['nombre_exemplaire']) . "</td>";
                 echo "<td>";
                 if (!empty($row['image'])) {
-                    echo "<img src='images/" . htmlspecialchars($row['image']) . "' alt='Image' width='100'>";
+                    echo "<img src='../images/" . htmlspecialchars($row['image']) . "' alt='Image' width='100'>";
                 } else {
                     echo "Pas d'image";
                 }

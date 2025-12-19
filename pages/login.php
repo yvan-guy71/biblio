@@ -19,8 +19,8 @@
         .tabs { display:flex; gap:6px; margin-bottom:14px; }
         .tab-btn { flex:1; padding:10px 14px; border-radius:8px; border:1px solid #e1e6e6; background:#fff; cursor:pointer; font-weight:600 }
         .tab-btn.active { background:#163f2ffd; color:#fff; border-color:#163f2ffd }
-        label { display:block; margin:10px 0 6px 0; font-size:0.95rem; color: rgba(250, 253, 250, 1) }
-        input[type="text"], input[type="email"], input[type="password"] { width:100%; padding:12px; border-radius:6px; border:1px solid #d3dbe0; background: #ffffff6c; color: rgba(5, 5, 5, 1); }
+        label { display:block; margin:12px 0 8px 0; font-size:0.95rem; color: rgba(250, 253, 250, 1) }
+        input[type="text"], input[type="email"], input[type="password"] { width:100%; padding:7px; border-radius:6px; border:1px solid #d3dbe0; background: #ffffff6c; color: rgba(5, 5, 5, 1); }
         .forgot { display:block; margin:8px 0 12px 0; color:#2a6ea1; text-decoration:none; font-size:0.9rem }
         .primary-btn { width:100%; padding:12px; border-radius:8px; background:#163f2ffd; color:#fff; border:none; cursor:pointer; font-weight:600 }
         .msg { margin:10px 0; color: #080 }
@@ -29,6 +29,7 @@
         .hidden { display:none !important; }
         form { display:flex; flex-direction:column; gap:12px; padding: 20px; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
         .auth-card { background-color: #163f2f69;}
+        .register-box { background-color: #163f2f69; max-width: 100%;}
     </style>
 </head>
 <body>
@@ -114,7 +115,6 @@ if (!empty($_SESSION['user_id'])) {
         }
     }
     ?>
-
     <div class="center-wrap">
         <div class="auth-card" id="auth-left">
             <div class="tabs">
@@ -130,9 +130,9 @@ if (!empty($_SESSION['user_id'])) {
                             <input type="text" name="fake-username" autocomplete="username">
                             <input type="password" name="fake-password" autocomplete="current-password">
                         </div>
-                        <label>Nom d'utilisateur ou Email :</label>
+                        <label></label>
                         <input type="email" name="email" placeholder="Email ou Nom d'utilisateur" required autocomplete="email">
-                        <label>Mot de passe :</label>
+                        <label></label>
                         <input type="password" name="password" placeholder="Mot de passe" required autocomplete="current-password">
                         <a class="forgot" href="#">Mot de passe oublié ?</a>
                         <button class="primary-btn" type="submit" name="login">Connexion</button>
@@ -145,13 +145,13 @@ if (!empty($_SESSION['user_id'])) {
                         <input type="text" name="fake-reg-username" autocomplete="username">
                         <input type="password" name="fake-reg-password" autocomplete="new-password">
                     </div>
-                    <label>Prénom :</label>
+                    <label></label>
                     <input type="text" name="prenom" placeholder="Prénom" required autocomplete="given-name">
-                    <label>Nom :</label>
+                    <label></label>
                     <input type="text" name="nom" placeholder="Nom" required autocomplete="family-name">
-                    <label>Email :</label>
+                    <label></label>
                     <input type="email" name="email" placeholder="Email" required autocomplete="email">
-                    <label>Mot de passe :</label>
+                    <label></label>
                     <input type="password" name="password" placeholder="Mot de passe (min 6)" required autocomplete="new-password">
                     <button class="primary-btn" type="submit" name="register">S'inscrire</button>
                 </form>

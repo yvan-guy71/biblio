@@ -1,7 +1,5 @@
 <?php
 include 'inc/connexion.php';
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +8,40 @@ error_reporting(E_ALL);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD PHP</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f0f8ff57 ;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            color: #fff;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"], textarea, input[type="file"] {
+            background-color: #fcf9f98f;
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
     <?php include 'inc/header.php'; ?>
