@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <?php include '../inc/header.php'; ?>
+    <?php include 'inc/header.php'; ?>
     <?php
-include '../inc/check_admin.php';
-include '../inc/connexion.php';
+include 'inc/check_admin.php';
+// Database connection is already established in index.php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];
@@ -25,13 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($con->query($sql) === TRUE) {
         echo "Livre mis à jour avec succès";
-        header("Location: liste.php");
+        header("Location: index.php?page=list");
     } else {
         echo "Erreur lors de la mise à jour du livre: " . $con->error;
     }
 }
-$con->close();
+// Connection closed in index.php (or let it close automatically)
 ?>
-<?php include '../inc/footer.php'; ?>
+<?php include 'inc/footer.php'; ?>
 </body>
 </html>

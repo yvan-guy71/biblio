@@ -1,5 +1,5 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) session_start();
+// Session is already started in index.php
 $_SESSION = [];
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
@@ -9,6 +9,6 @@ if (ini_get("session.use_cookies")) {
     );
 }
 session_destroy();
-header('Location: acceuil.php');
+header('Location: index.php?page=home');
 exit();
 ?>

@@ -1,8 +1,7 @@
 <?php
-include '../inc/connexion.php';
-session_start();
+// DB included by index.php
 if (empty($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: index.php?page=login');
     exit();
 }
 $user_id = (int) $_SESSION['user_id'];
@@ -34,7 +33,7 @@ $stmt->close();
 <head>
     <meta charset="utf-8">
     <title>Ma Liste de Lecture</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         th, td {
             padding: 8px 12px;
@@ -49,7 +48,7 @@ $stmt->close();
     </style>
 </head>
 <body>
-<?php include '../inc/header.php'; ?>
+<?php include 'inc/header.php'; ?>
 <h1 style="text-align:center;margin-top:18px">Ma Liste de Lecture</h1>
 <?php if (empty($wishlist_books)): ?>
     <p style="text-align:center">Votre liste est vide.</p>
@@ -63,14 +62,15 @@ $stmt->close();
                 <td><?php echo htmlspecialchars($book['date_emprunt'] ?? ''); ?></td>
                 <td><?php echo htmlspecialchars($book['date_retour'] ?? ''); ?></td>
                 <td>
-                    <form method="post" action="remove_from_list.php">
+                    <form method="post" action="index.php?page=remove_from_list" style="display:inline;background:none;box-shadow:none;padding:0;margin:0;">
                         <input type="hidden" name="livre_id" value="<?php echo (int)$book['livre_id']; ?>">
-                        <button type="submit">Retirer</button>
+                        <button type="submit" style="background:red;padding:5px 10px;">Retirer</button>
                     </form>
                 </td>
             </tr>
         <?php endforeach; ?>
     </table>
 <?php endif; ?>
+<?php include 'inc/footer.php'; ?>
 </body>
 </html>

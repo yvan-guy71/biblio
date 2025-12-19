@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Détails du livre</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
     p {
@@ -36,9 +36,9 @@ img {
     </style>
 </head>
 <body>
-    <?php include '../inc/header.php'; ?>
+    <?php include 'inc/header.php'; ?>
 <?php 
-include '../inc/connexion.php';
+// DB included by index.php
 $userDisplayName = '';
 if (!empty($_SESSION['prenom']) || !empty($_SESSION['nom'])) {
     $userDisplayName = trim(($_SESSION['prenom'] ?? '') . ' ' . ($_SESSION['nom'] ?? ''));
@@ -57,10 +57,10 @@ if ($result->num_rows > 0) {
             echo "<strong>Maison d'édition : </strong> ". htmlspecialchars($row['maison_edition']) . "<br><br>";
             echo "<strong>Nombre d'exemplaires : </strong> ". htmlspecialchars($row['nombre_exemplaire']) . "<br>";
             echo "<br>";
-            echo "<img src='../images/" . htmlspecialchars($row['image']) . "' alt='Image' width='100' style='margin-top:10px;'><br>";
-            echo "<form method=\"post\" action=\"add_to_list.php\" style=\"margin-top:10px;\">";
+            echo "<img src='images/" . htmlspecialchars($row['image']) . "' alt='Image' width='150'><br>";
+            echo "<form method=\"post\" action=\"index.php?page=add_to_list\" style=\"margin-top:20px;text-align:center;\">";
             echo "<input type=\"hidden\" name=\"livre_id\" value=\"" . (int)$row['id'] . "\">";
-            echo "<button type=\"submit\">Ajouter à ma liste</button>";
+            echo "<button class=\"primary-btn\" type=\"submit\">Ajouter à ma liste</button>";
             echo "</form>";
             echo "</div>";
     }
@@ -68,6 +68,6 @@ if ($result->num_rows > 0) {
     echo "Aucun livre trouvé";
 }
 ?>
-<?php include '../inc/footer.php'; ?>
+<?php include 'inc/footer.php'; ?>
 </body>
 </html>

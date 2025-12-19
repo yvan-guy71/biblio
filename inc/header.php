@@ -18,21 +18,25 @@ if (!empty($_SESSION['user_id'])) {
 }
 ?>
 <header>
-    <div class="container"><a href="../pages/acceuil.php"><strong>LibraNum</strong></a>
+    <div class="container"><a href="index.php?page=home"><strong>LibraNum</strong></a>
     <nav>
         <button class="menu-toggle" id="menu-toggle">
             <i class="fas fa-bars"></i>
         </button>
         <ul id="menu" class="menu">
-            <li><a href="../pages/acceuil.php">Accueil</a></li>
+            <li><a href="index.php?page=home">Accueil</a></li>
             <li><a href="#about">A propos</a></li>
             <li><a href="#contact">Contact</a></li>
             <?php if (!empty($userDisplayName)): ?>
-                <li><a href="../pages/wishlist.php">Liste de souhaits</a></li>
-                <li><a href="../pages/logout.php">Déconnexion</a></li>
+                <li><a href="index.php?page=wishlist">Liste de souhaits</a></li>
+                <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+                    <li><a href="index.php?page=list">Gestion Livres</a></li>
+                    <li><a href="index.php?page=add">Ajouter Livre</a></li>
+                <?php endif; ?>
+                <li><a href="index.php?page=logout">Déconnexion</a></li>
             <?php else: ?>
-                <li><a href="login.php#login-box">Connexion</a></li>
-                <li><a href="login.php#register">Inscription</a></li>
+                <li><a href="index.php?page=login#login-box">Connexion</a></li>
+                <li><a href="index.php?page=login#register">Inscription</a></li>
             <?php endif; ?>
         </ul>
     </nav>

@@ -1,67 +1,69 @@
 <?php
-include 'inc/connexion.php';
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD PHP</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        form {
-            max-width: 500px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #f0f8ff57 ;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            color: #fff;
-        }
-        label {
-            font-weight: bold;
-        }
-        input[type="text"], input[type="number"], textarea, input[type="file"] {
-            background-color: #fcf9f98f;
-            width: 100%;
-            padding: 8px;
-            margin: 8px 0;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-    <?php include 'inc/header.php'; ?>
-    <h1>Enrégistrer un livre</h1>
-    <form action="pages/insert.php" method="post">
-        <label for="Auteur">Auteur:</label><br>
-        <input type="text" name="Auteur" required><br>
-        <label for="Titre">Titre:</label><br>
-        <input type="text" name="Titre"><br>
-        <label for="Description">Description:</label><br>
-        <textarea type="text" name="Description"></textarea><br>
-        <label for="Maison d'édition">Maison d'édition:</label><br>
-        <input type="text" name="Maison_edition"><br>
-        <label for="Nombre d'exemplaires">Nombre d'exemplaires:</label><br>
-        <input type="number" name="Nombre_exemplaire"><br><br>
-        <label for="Image">Image:</label><br>
-        <input type="file" name="Image" accept=".jpg,.jpeg,.png,.avif,image/jpeg,image/png,image/avif"><br><br>
-        <button type="submit" value="Ajouter">Enrégistrer</button>
-    </form>
-<?php include 'inc/footer.php'; ?>
-</body>
-</html>
+session_start();
+// Include connection once for all pages
+require_once 'inc/connexion.php';
 
+// Define the page to load
+$page = $_GET['page'] ?? 'home';
+
+// Basic routing
+switch ($page) {
+    case 'home':
+        $file = 'pages/acceuil.php';
+        break;
+    case 'list':
+        $file = 'pages/liste.php';
+        break;
+    case 'add':
+        $file = 'pages/ajouter.php';
+        break;
+    case 'login':
+        $file = 'pages/login.php';
+        break;
+    case 'logout':
+        $file = 'pages/logout.php';
+        break;
+    case 'wishlist':
+        $file = 'pages/wishlist.php';
+        break;
+    case 'add_to_list':
+        $file = 'pages/add_to_list.php';
+        break;
+    case 'remove_from_list':
+        $file = 'pages/remove_from_list.php';
+        break;
+    case 'details':
+        $file = 'pages/details.php';
+        break;
+    case 'edit':
+        $file = 'pages/edit.php';
+        break;
+    case 'update':
+        $file = 'pages/update.php';
+        break;
+    case 'delete':
+        $file = 'pages/supprimer.php'; // or suppression.php?
+        break;
+    case 'insert':
+        $file = 'pages/insert.php';
+        break;
+    case 'results':
+        $file = 'pages/results.php';
+        break;
+    default:
+        $file = 'pages/acceuil.php';
+        break;
+}
+
+// Check if file exists before including
+if (file_exists($file)) {
+    // We include the file.
+    // Note: The included files must NOT have session_start() or duplicate includes if we want to be clean,
+    // but `require_once` handles the connection safely.
+    // However, paths in included files (like `../inc/header.php`) will break because we are in root.
+    // We need to fix those files.
+    include $file;
+} else {
+    echo "<h1>Page not found</h1>";
+}
+?>

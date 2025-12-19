@@ -1,6 +1,6 @@
 <?php 
-include '../inc/check_admin.php';
-include '../inc/connexion.php';
+include 'inc/check_admin.php';
+// Connection already included in index.php
 $id = $_GET['id'];
 $sql = "SELECT * FROM livres WHERE id = $id";
 $result = $con->query($sql);
@@ -11,6 +11,7 @@ $result = $con->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edition du livre</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <?php include '../inc/header.php'; ?>
@@ -19,7 +20,7 @@ $result = $con->query($sql);
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
     ?>
-    <form action="update.php" method="post">
+    <form action="index.php?page=update" method="post">
         <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
         <label for="Auteur">Auteur:</label><br>
         <input type="text" name="Auteur" value="<?php echo $row['auteur']; ?>" required><br>
@@ -42,6 +43,6 @@ $result = $con->query($sql);
     }
     ?>
 
-<?php include '../inc/footer.php'; ?>
+<?php include 'inc/footer.php'; ?>
 </body>
 </html>

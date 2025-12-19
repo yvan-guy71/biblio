@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <?php
-        session_start();
-        include '../inc/connexion.php';
+        // Session and DB included by index.php
         $userDisplayName = '';
         if (!empty($_SESSION['user_id'])) {
             $uid = $_SESSION['user_id'];
@@ -125,21 +124,21 @@
 <body>
 <section>
     <header>
-        <div class="container"><a href="../pages/acceuil.php"><strong>LibraNum</strong></a>
+        <div class="container"><a href="index.php?page=home"><strong>LibraNum</strong></a>
         <nav>
             <button class="menu-toggle" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </button>
             <ul id="menu" class="menu">
-                <li><a href="../pages/acceuil.php">Accueil</a></li>
+                <li><a href="index.php?page=home">Accueil</a></li>
                 <li><a href="#about">A propos</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <?php if (!empty($userDisplayName)): ?>
-                    <li><a href="../pages/wishlist.php">Liste de souhaits</a></li>
-                    <li><a href="../pages/logout.php">Déconnexion</a></li>
+                    <li><a href="index.php?page=wishlist">Liste de souhaits</a></li>
+                    <li><a href="index.php?page=logout">Déconnexion</a></li>
                 <?php else: ?>
-                    <li><a href="login.php#login-box">Connexion</a></li>
-                    <li><a href="login.php#register">Inscription</a></li>
+                    <li><a href="index.php?page=login#login-box">Connexion</a></li>
+                    <li><a href="index.php?page=login#register">Inscription</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
@@ -147,7 +146,8 @@
     </header>
     <h1>Bienvenue sur la meilleur Bibliothèque<br>numérique au monde</h1>
     <p>Ici vous pouvez trouver tous les livres que vous souhaitez</p>
-    <form action="results.php" method="get">
+    <form action="index.php?page=results" method="get">
+        <input type="hidden" name="page" value="results">
         <input type="search" name="q" placeholder="Cherchez un livre..." required>
         <button type="submit">Rechercher</button>
     </form>
@@ -155,14 +155,14 @@
     <div class="underline"></div>
 <div class="grid-container">
     <?php
-include '../inc/connexion.php';
+// DB included by index.php
 $sql = "SELECT * FROM livres";
 $result = $con->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        echo "<a href='details.php?id=" . $row['id'] . "'>";
+        echo "<a href='index.php?page=details&id=" . $row['id'] . "'>";
         echo "<div class='book-card'>";
-        echo htmlspecialchars($row['image']) ? "<img src='../images/" . htmlspecialchars($row['image']) . "' alt='Image' width='120'>" 
+        echo htmlspecialchars($row['image']) ? "<img src='images/" . htmlspecialchars($row['image']) . "' alt='Image' width='120'>" 
         : "<span>No Image</span>";
         echo "<div class='titre'>" . htmlspecialchars($row['titre']) . "</div>";
         echo "</div>";
@@ -201,6 +201,6 @@ if ($result->num_rows > 0) {
         });
     });
 </script>
-<?php include '../inc/footer.php'; ?>
+<?php include 'inc/footer.php'; ?>
 </body>
 </html>

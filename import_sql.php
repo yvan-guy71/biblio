@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $user = "root";
-$pass = "";
+$password = "";
 $db = "book_store";
 $port = 3306;
 
@@ -18,8 +18,6 @@ if (getenv('DATABASE_URL')) {
     $password = getenv('MYSQLPASSWORD');
     $db = getenv('MYSQLDATABASE');
     $port = getenv('MYSQLPORT');
-} else {
-    die("Aucune configuration de base de données trouvée (DATABASE_URL ou MYSQLHOST).");
 }
 
 $con = new mysqli($host, $user, $password, $db, $port);

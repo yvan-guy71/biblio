@@ -1,9 +1,8 @@
 <?php
-session_start();
-include '../inc/connexion.php';
+// DB included by index.php
 
 if (empty($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: index.php?page=login');
     exit();
 }
 
@@ -12,7 +11,7 @@ $livre_id = isset($_POST['livre_id']) ? (int) $_POST['livre_id'] : 0;
 
 if ($livre_id <= 0) {
     // pas d'id valide => retour
-    header('Location: wishlist.php');
+    header('Location: index.php?page=wishlist');
     exit();
 }
 
@@ -21,7 +20,7 @@ $del = $con->prepare('DELETE FROM liste_lecture WHERE id_lecteur = ? AND id_livr
 if ($del === false) {
     // erreur de préparation -> log et retour
     error_log('Prepare failed: ' . $con->error);
-    header('Location: wishlist.php');
+    header('Location: index.php?page=wishlist');
     exit();
 }
 
@@ -30,7 +29,7 @@ if (!$del->execute()) {
     // erreur d'exécution -> log et retour
     error_log('Execute failed: ' . $del->error);
     $del->close();
-    header('Location: wishlist.php');
+    header('Location: index.php?page=wishlist');
     exit();
 }
 
@@ -38,14 +37,14 @@ if (!$del->execute()) {
 if ($del->affected_rows > 0) {
     // suppression réussie
     $del->close();
-    header('Location: wishlist.php');
+    header('Location: index.php?page=wishlist');
     exit();
 } else {
     // aucune ligne supprimée -> possible mismatch (user_id / livre_id)
     $del->close();
     // optionnel : enregistrer message en session pour affichage
     $_SESSION['flash'] = 'Aucune entrée trouvée pour suppression.';
-    header('Location: wishlist.php');
+    header('Location: index.php?page=wishlist');
     exit();
 }
 ?>

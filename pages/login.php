@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authentification</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         body { font-family: Arial, sans-serif; }
         .center-wrap { display:flex; align-items:center; justify-content:center; min-height:80vh; }
@@ -33,7 +33,7 @@
     </style>
 </head>
 <body>
-    <?php include '../inc/header.php'; ?>
+    <?php include 'inc/header.php'; ?>
     <?php
 // messages par défaut
 $message = '';
@@ -41,7 +41,7 @@ $error = '';
 
 
 if (!empty($_SESSION['user_id'])) {
-    header('Location: acceuil.php');
+    header('Location: index.php?page=home');
     exit();
 }
 
@@ -103,7 +103,7 @@ if (!empty($_SESSION['user_id'])) {
                     $_SESSION['nom'] = $row['nom'] ?? '';
                     $_SESSION['email'] = $row['email'] ?? '';
                     $_SESSION['is_admin'] = (int)($row['is_admin'] ?? 0);
-                    header('Location: acceuil.php');
+                    header('Location: index.php?page=home');
                     exit();
                 } else {
                     $error = 'Nom d\'utilisateur ou mot de passe incorrect.';
@@ -125,7 +125,7 @@ if (!empty($_SESSION['user_id'])) {
                 <h3>Connexion</h3>
                 <?php if ($message): ?><div class="msg"><?php echo htmlspecialchars($message); ?></div><?php endif; ?>
                 <?php if ($error): ?><div class="error"><?php echo htmlspecialchars($error); ?></div><?php endif; ?>
-                <form method="post" action="login.php" autocomplete="off">
+                <form method="post" action="index.php?page=login" autocomplete="off">
                         <div style="position: absolute; left: -9999px; top: auto; width:1px; height:1px; overflow:hidden;">
                             <input type="text" name="fake-username" autocomplete="username">
                             <input type="password" name="fake-password" autocomplete="current-password">
@@ -140,7 +140,7 @@ if (!empty($_SESSION['user_id'])) {
             </div>
             <div id="register-box" class="hidden">
                 <h3>Inscription</h3>
-                <form method="post" action="login.php" autocomplete="off">
+                <form method="post" action="index.php?page=login" autocomplete="off">
                     <div style="position: absolute; left: -9999px; top: auto; width:1px; height:1px; overflow:hidden;">
                         <input type="text" name="fake-reg-username" autocomplete="username">
                         <input type="password" name="fake-reg-password" autocomplete="new-password">
