@@ -1,5 +1,5 @@
 <?php
-include 'inc/check_admin.php';
+include '../inc/check_admin.php';
 // Database connection is already established in index.php
 
 $id = 0;
@@ -43,7 +43,7 @@ if ($id > 0) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <?php include 'inc/header.php'; ?>
+    <?php include '../inc/header.php'; ?>
     <h1>Suppression du livre</h1>
     <?php if ($book): ?>
         <form action="index.php?page=delete" method="post">
@@ -57,6 +57,6 @@ if ($id > 0) {
         <p>Aucun livre trouvé ou ID invalide.</p>
         <a href="index.php?page=list">Retour à la liste</a>
     <?php endif; ?>
-    <?php include 'inc/footer.php'; ?>
+    <?php include '../inc/footer.php'; ?>
 </body>
 </html>

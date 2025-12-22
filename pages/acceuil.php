@@ -9,6 +9,7 @@
     <?php
         // Session and DB included by index.php
         $userDisplayName = '';
+        $isAdmin = false;
         if (!empty($_SESSION['user_id'])) {
             $uid = $_SESSION['user_id'];
             $s = $con->prepare('SELECT prenom, nom, email FROM lecteurs WHERE id = ? LIMIT 1');
@@ -19,10 +20,12 @@
                 $userDisplayName = trim($row['prenom'] . ' ' . $row['nom']);
             }
             $s->close();
+            $isAdmin = !empty($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1;
         }
     ?>
     <style>
         .grid-container {
+            max-width: 800px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 30px;
@@ -73,6 +76,47 @@
             margin-bottom: 5px;
             border-radius: 2px;
             margin-left: 10px;
+        }
+        .admin-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+        }
+        .btn-edit-small, .btn-delete-small {
+            padding: 3px 6px;
+            font-size: 0.6rem;
+            text-decoration: none;
+            border-radius: 3px;
+            color: white;
+        }
+        .btn-edit-small {
+            background-color: #4CAF50;
+        }
+        .btn-edit-small:hover {
+            background-color: #45a049;
+        }
+        .btn-delete-small {
+            background-color: #f44336;
+        }
+        .btn-delete-small:hover {
+            background-color: #da190b;
+        }
+        .add-book-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2196F3;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .add-book-btn:hover {
+            background-color: #0b7dda;
         }
         h2 {
             align-items: center;
@@ -135,6 +179,9 @@
                 <li><a href="#contact">Contact</a></li>
                 <?php if (!empty($userDisplayName)): ?>
                     <li><a href="index.php?page=wishlist">Liste de souhaits</a></li>
+                    <?php if ($isAdmin): ?>
+                        <li><a href="index.php?page=list">Gestion Livres</a></li>
+                    <?php endif; ?>
                     <li><a href="index.php?page=logout">Déconnexion</a></li>
                 <?php else: ?>
                     <li><a href="index.php?page=login#login-box">Connexion</a></li>
@@ -165,6 +212,12 @@ if ($result->num_rows > 0) {
         echo htmlspecialchars($row['image']) ? "<img src='images/" . htmlspecialchars($row['image']) . "' alt='Image' width='120'>" 
         : "<span>No Image</span>";
         echo "<div class='titre'>" . htmlspecialchars($row['titre']) . "</div>";
+        if ($isAdmin) {
+            echo "<div class='admin-buttons'>";
+            echo "<a href='index.php?page=edit&id=" . $row['id'] . "' class='btn-edit-small'>Modifier</a>";
+            echo "<a href='index.php?page=delete&id=" . $row['id'] . "' class='btn-delete-small'>Supprimer</a>";
+            echo "</div>";
+        }
         echo "</div>";
         echo "</a>";
         }
@@ -185,7 +238,7 @@ if ($result->num_rows > 0) {
         <div class="underline"></div>
         <div class="address">
         <p>123 Rue de la Bibliothèque, 75000 Lomé, Togo<br></p>
-        <span>Téléphone : +33 1 23 45 67 89<br></span>
+        <span>Téléphone : +228 99 14 06 16<br></span>
         </div>
     </div>
 </section>
@@ -201,6 +254,9 @@ if ($result->num_rows > 0) {
         });
     });
 </script>
-<?php include 'inc/footer.php'; ?>
+<?php if ($isAdmin): ?>
+    <a href="index.php?page=add" class="add-book-btn" title="Ajouter un livre">+</a>
+<?php endif; ?>
+<?php include './inc/footer.php'; ?>
 </body>
 </html>

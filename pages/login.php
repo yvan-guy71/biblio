@@ -33,7 +33,7 @@
     </style>
 </head>
 <body>
-    <?php include 'inc/header.php'; ?>
+    <?php include './inc/header.php'; ?>
     <?php
 // messages par défaut
 $message = '';

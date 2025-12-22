@@ -62,7 +62,7 @@ if ($result->num_rows > 0) {
             echo "<input type=\"hidden\" name=\"livre_id\" value=\"" . (int)$row['id'] . "\">";
             echo "<button class=\"primary-btn\" type=\"submit\">Ajouter à ma liste</button>";
             echo "</form>";
-            echo "</div>";
+        echo "</div>";
     }
 } else {
     echo "Aucun livre trouvé";

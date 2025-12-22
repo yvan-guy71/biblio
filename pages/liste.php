@@ -1,6 +1,6 @@
 <?php
 // DB included by index.php
-include 'inc/check_admin.php';
+include '../inc/check_admin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +26,32 @@ include 'inc/check_admin.php';
         td a {
             text-decoration: none;
             color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+        .btn-edit {
+            background-color: #4CAF50;
+        }
+        .btn-edit:hover {
+            background-color: #45a049;
+        }
+        .btn-delete {
+            background-color: #f44336;
+        }
+        .btn-delete:hover {
+            background-color: #da190b;
+        }
+        .btn-add {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .btn-add:hover {
+            background-color: #0b7dda;
         }
         nav ul li a {
             color: white;
@@ -33,7 +59,7 @@ include 'inc/check_admin.php';
     </style>
 </head>
 <body>
-    <?php include 'inc/header.php'; ?>
+    <?php include './inc/header.php'; ?>
     <h1>Listes de livres</h1>
     <table border="1">
         <thead>
@@ -62,14 +88,14 @@ include 'inc/check_admin.php';
                 echo "<td>" . htmlspecialchars($row['nombre_exemplaire']) . "</td>";
                 echo "<td>";
                 if (!empty($row['image'])) {
-                    echo "<img src='../images/" . htmlspecialchars($row['image']) . "' alt='Image' width='100'>";
+                    echo "<img src='images/" . htmlspecialchars($row['image']) . "' alt='Image' width='100'>";
                 } else {
                     echo "Pas d'image";
                 }
                 echo "</td>";
                 echo "<td>";
-                echo "<a href='index.php?page=edit&id=" . $row['id'] . "'>Modifier</a> ";
-                echo "<a href='index.php?page=delete&id=" . $row['id'] . "'>Supprimer</a>";
+                echo "<a href='index.php?page=edit&id=" . $row['id'] . "' class='btn-edit'>Modifier</a> ";
+                echo "<a href='index.php?page=delete&id=" . $row['id'] . "' class='btn-delete'>Supprimer</a>";
                 echo "</td>";
                 echo "</tr>";
             }
@@ -78,7 +104,9 @@ include 'inc/check_admin.php';
         }
         ?>
     </table><br>
-    <button><a href="../index.php">Ajouter un Livre</a></button>
+    <a href="index.php?page=add" class="btn-add">Ajouter un Livre</a>
+    <br><br>
+    <a href="index.php?page=gestion_users" class="btn-add">Gérer les Utilisateurs</a>
     <style>
         table {
             width: 100%;
@@ -96,6 +124,6 @@ include 'inc/check_admin.php';
             color: black;
         }
     </style>
-<?php include 'inc/footer.php'; ?>
+<?php include './inc/footer.php'; ?>
 </body>
 </html>

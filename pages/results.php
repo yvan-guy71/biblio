@@ -17,6 +17,7 @@
     text-align: left;
     gap: 10px;
     font-size: 1.3rem;
+    color: #fff;
 }
 
 .btn-details {

@@ -34,6 +34,7 @@ $stmt->close();
     <meta charset="utf-8">
     <title>Ma Liste de Lecture</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         th, td {
             padding: 8px 12px;

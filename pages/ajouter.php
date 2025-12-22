@@ -1,5 +1,6 @@
 <?php
-// DB included by index.php
+include '../inc/check_admin.php';
+// DB inclu index.php
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +8,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD PHP</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         form {
             max-width: 500px;
@@ -44,7 +46,7 @@
     </style>
 </head>
 <body>
-    <?php include 'inc/header.php'; ?>
+    <?php include '../inc/header.php'; ?>
     <h1>Enrégistrer un livre</h1>
     <form action="index.php?page=insert" method="post" enctype="multipart/form-data">
         <label for="Auteur">Auteur:</label><br>
@@ -61,7 +63,7 @@
         <input type="file" name="Image" accept=".jpg,.jpeg,.png,.avif,image/jpeg,image/png,image/avif"><br><br>
         <button type="submit" value="Ajouter">Enrégistrer</button>
     </form>
-<?php include 'inc/footer.php'; ?>
+<?php include '../inc/footer.php'; ?>
 </body>
 </html>
 

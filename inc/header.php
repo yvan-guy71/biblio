@@ -18,7 +18,7 @@ if (!empty($_SESSION['user_id'])) {
 }
 ?>
 <header>
-    <div class="container"><a href="index.php?page=home"><strong>LibraNum</strong></a>
+    <div class="container"><a href="index.php?page=home"><strong style="font-size: 2.3rem;">LibraNum</strong></a>
     <nav>
         <button class="menu-toggle" id="menu-toggle">
             <i class="fas fa-bars"></i>

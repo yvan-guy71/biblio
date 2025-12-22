@@ -1,5 +1,5 @@
 <?php 
-include 'inc/check_admin.php';
+include '../inc/check_admin.php';
 // Connection already included in index.php
 $id = $_GET['id'];
 $sql = "SELECT * FROM livres WHERE id = $id";
@@ -20,8 +20,9 @@ $result = $con->query($sql);
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
     ?>
-    <form action="index.php?page=update" method="post">
+    <form action="index.php?page=update" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+        <input type="hidden" name="existing_image" value="<?php echo $row['image']; ?>">
         <label for="Auteur">Auteur:</label><br>
         <input type="text" name="Auteur" value="<?php echo $row['auteur']; ?>" required><br>
         <label for="Titre">Titre:</label><br>
@@ -43,6 +44,6 @@ $result = $con->query($sql);
     }
     ?>
 
-<?php include 'inc/footer.php'; ?>
+<?php include '../inc/footer.php'; ?>
 </body>
 </html>

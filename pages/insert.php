@@ -1,6 +1,7 @@
 <?php 
-include 'inc/check_admin.php';
+include '../inc/check_admin.php';
 // DB included by index.php
+include '../inc/connexion.php';
 
 $auteur = mysqli_real_escape_string($con, $_POST['Auteur'] ?? '');
 $titre = mysqli_real_escape_string($con, $_POST['Titre'] ?? '');
