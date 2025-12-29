@@ -1,5 +1,5 @@
 <?php
-include '../inc/check_admin.php';
+include 'inc/check_admin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +7,7 @@ include '../inc/check_admin.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Utilisateurs</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         table {
             width: 100%;
@@ -45,8 +45,9 @@ include '../inc/check_admin.php';
     </style>
 </head>
 <body>
-    <?php include '../inc/header.php'; ?>
+    <?php include 'inc/header.php'; ?>
     <h1>Gestion des Utilisateurs</h1>
+    <div style="overflow-x: auto;">
     <table border="1">
         <thead>
         <tr>
@@ -85,6 +86,7 @@ include '../inc/check_admin.php';
         ?>
         </tbody>
     </table>
+    </div>
     <br>
     <a href="index.php?page=list" class="btn-add">Retour à la Gestion des Livres</a>
     <style>
@@ -100,6 +102,6 @@ include '../inc/check_admin.php';
             background-color: #0b7dda;
         }
     </style>
-<?php include '../inc/footer.php'; ?>
+<?php include 'inc/footer.php'; ?>
 </body>
 </html>

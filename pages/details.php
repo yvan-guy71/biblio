@@ -12,7 +12,7 @@
         margin: 10px auto;
     }
     .affichage {
-    color: #181313ff;
+    color: #fff;    
     width: 500px;
     margin: 20px auto;
     padding: 20px;
@@ -21,7 +21,7 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     text-align: left;
     gap: 10px;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 }
 span {
     display: flex;
@@ -31,8 +31,21 @@ span {
     color: #fff
 }
 img {
-    margin-left: 180px;
+    margin-top: 10px;
+    display: block;
+    margin: 0 auto;
 }
+    @media (max-width: 600px) {
+        .affichage {
+            width: 90%;
+            margin: 10px auto;
+            padding: 15px;
+            font-size: 1rem;
+        }
+        p {
+            font-size: 1rem;
+        }
+    }
     </style>
 </head>
 <body>

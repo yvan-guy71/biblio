@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authentification</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body { font-family: Arial, sans-serif; }
         .center-wrap { display:flex; align-items:center; justify-content:center; min-height:80vh; }
@@ -20,7 +21,7 @@
         .tab-btn { flex:1; padding:10px 14px; border-radius:8px; border:1px solid #e1e6e6; background:#fff; cursor:pointer; font-weight:600 }
         .tab-btn.active { background:#163f2ffd; color:#fff; border-color:#163f2ffd }
         label { display:block; margin:12px 0 8px 0; font-size:0.95rem; color: rgba(250, 253, 250, 1) }
-        input[type="text"], input[type="email"], input[type="password"] { width:100%; padding:7px; border-radius:6px; border:1px solid #d3dbe0; background: #ffffff6c; color: rgba(5, 5, 5, 1); }
+        input[type="text"], input[type="email"], input[type="password"] { width:100%; padding:7px; border-radius:6px; border:1px solid #d3dbe0; background: #ffffff6c; color: #fff; }
         .forgot { display:block; margin:8px 0 12px 0; color:#2a6ea1; text-decoration:none; font-size:0.9rem }
         .primary-btn { width:100%; padding:12px; border-radius:8px; background:#163f2ffd; color:#fff; border:none; cursor:pointer; font-weight:600 }
         .msg { margin:10px 0; color: #080 }
@@ -122,7 +123,7 @@ if (!empty($_SESSION['user_id'])) {
                 <button type="button" class="tab-btn" data-target="#register-box">Inscription</button>
             </div>
             <div id="login-box">
-                <h3>Connexion</h3>
+                <h2>Connexion</h2>
                 <?php if ($message): ?><div class="msg"><?php echo htmlspecialchars($message); ?></div><?php endif; ?>
                 <?php if ($error): ?><div class="error"><?php echo htmlspecialchars($error); ?></div><?php endif; ?>
                 <form method="post" action="index.php?page=login" autocomplete="off">
@@ -139,7 +140,7 @@ if (!empty($_SESSION['user_id'])) {
                     </form>
             </div>
             <div id="register-box" class="hidden">
-                <h3>Inscription</h3>
+                <h2>Inscription</h2>
                 <form method="post" action="index.php?page=login" autocomplete="off">
                     <div style="position: absolute; left: -9999px; top: auto; width:1px; height:1px; overflow:hidden;">
                         <input type="text" name="fake-reg-username" autocomplete="username">
@@ -156,9 +157,8 @@ if (!empty($_SESSION['user_id'])) {
                     <button class="primary-btn" type="submit" name="register">S'inscrire</button>
                 </form>
             </div>
-</div>
-
-
+        </div>
+    </div>
     <script>
         function showTab(hash) {
             var targetId = '#login-box';
@@ -187,5 +187,6 @@ if (!empty($_SESSION['user_id'])) {
             showTab(h);
         });
     </script>
-    </body>
-    </html>
+<?php include './inc/footer.php'; ?>
+</body>
+</html>

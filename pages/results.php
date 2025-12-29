@@ -16,7 +16,7 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     text-align: left;
     gap: 10px;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: #fff;
 }
 
@@ -44,14 +44,24 @@ span {
 }
 img {
     margin-top: 10px;
-    margin-left: 180px;
+    display: block;
+    margin: 0 auto;
 }
-</style>
-
+@media (max-width: 600px) {
+    .affichage {
+        width: 90%;
+        margin: 10px auto;
+        padding: 15px;
+        font-size: 1rem;
+    }
+    .btn-details {
+        width: 80%;
+    }
+}
 </style>
 </head>
 <body>
-    <?php include 'inc/header.php'; ?>
+    <?php include './inc/header.php'; ?>
 <?php
 // Connection already included in index.php
 
@@ -68,7 +78,7 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
 
     if ($result->num_rows > 0) {
 
-        echo "<h2>Résultats pour : " . htmlspecialchars($recherche) . "</h2>";
+        echo "<h3>Résultats pour : " . htmlspecialchars($recherche) . "</h3>";
 
         while ($row = $result->fetch_assoc()) {
             echo "<div class='affichage'>";

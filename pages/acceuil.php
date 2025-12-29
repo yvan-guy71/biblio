@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
+    <title>LibraNum</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <?php
@@ -12,7 +12,7 @@
         $isAdmin = false;
         if (!empty($_SESSION['user_id'])) {
             $uid = $_SESSION['user_id'];
-            $s = $con->prepare('SELECT prenom, nom, email FROM lecteurs WHERE id = ? LIMIT 1');
+            $s = $con->prepare('SELECT prenom, nom, email, is_admin FROM lecteurs WHERE id = ? LIMIT 1');
             $s->bind_param('i', $uid);
             $s->execute();
             $r = $s->get_result();
@@ -30,7 +30,7 @@
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 30px;
             justify-items: center;
-            margin: 40px auto;
+            margin: 20px auto;
         }
         .book-card {
             position: relative;
@@ -41,13 +41,17 @@
         }
         .book-card img {
             display: block;
-            margin: 0 auto 10px auto;
             border-radius: 5px;
             max-width: 150px;
             max-height: 200px;
             object-fit: cover;
             width: 100%;
             height: 100%;
+        }
+        img {
+            display: block;
+            width: 200px;
+            height: 100px;
         }
         .book-card img:hover {
             transform: scale(1.09);
@@ -105,11 +109,12 @@
         }
         .add-book-btn {
             position: fixed;
+            z-index: 9999;
             bottom: 20px;
             right: 20px;
             background-color: #2196F3;
             color: white;
-            padding: 15px;
+            padding: 5px 10px;
             border-radius: 50%;
             text-decoration: none;
             font-size: 1.5rem;
@@ -130,14 +135,17 @@
             margin: 10px auto 30px auto;
         }
         p {
+            display: stretch;
             text-align: center;
             color: #fff;
             font-size: 1.1rem;
             flex-direction: column;
             margin: 10px auto;
             margin-top: 40px;
-            max-width: 1000px;
+            max-width: 80%;
             padding-bottom: 10px;
+            line-height: 1.6;
+            font-size: 1.3rem;
         }
         .contact {
             display: flex;
@@ -151,13 +159,6 @@
             padding-bottom: 40px;
             flex: 1;
         }
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: #213331;
-        }
         .address {
             display: flex;
             flex-direction: column;
@@ -166,31 +167,8 @@
     </style>
 </head>
 <body>
+<?php include 'inc/header.php'; ?>
 <section>
-    <header>
-        <div class="container"><a href="index.php?page=home"><strong>LibraNum</strong></a>
-        <nav>
-            <button class="menu-toggle" id="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul id="menu" class="menu">
-                <li><a href="index.php?page=home">Accueil</a></li>
-                <li><a href="#about">A propos</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <?php if (!empty($userDisplayName)): ?>
-                    <li><a href="index.php?page=wishlist">Liste de souhaits</a></li>
-                    <?php if ($isAdmin): ?>
-                        <li><a href="index.php?page=list">Gestion Livres</a></li>
-                    <?php endif; ?>
-                    <li><a href="index.php?page=logout">Déconnexion</a></li>
-                <?php else: ?>
-                    <li><a href="index.php?page=login#login-box">Connexion</a></li>
-                    <li><a href="index.php?page=login#register">Inscription</a></li>
-                <?php endif; ?>
-            </ul>
-        </nav>
-        </div>
-    </header>
     <h1>Bienvenue sur la meilleur Bibliothèque<br>numérique au monde</h1>
     <p>Ici vous pouvez trouver tous les livres que vous souhaitez</p>
     <form action="index.php?page=results" method="get">
@@ -201,8 +179,7 @@
     <h2>Nos livres disponibles</h2>
     <div class="underline"></div>
 <div class="grid-container">
-    <?php
-// DB included by index.php
+<?php
 $sql = "SELECT * FROM livres";
 $result = $con->query($sql);
 if ($result->num_rows > 0) {
@@ -242,18 +219,7 @@ if ($result->num_rows > 0) {
         </div>
     </div>
 </section>
-<script>
-    const menuToggle = document.getElementById('menu-toggle');
-    const menu = document.getElementById('menu');
-    menuToggle.addEventListener('click', function() {
-        menu.classList.toggle('open');
-    });
-    document.querySelectorAll('.menu a').forEach(link => {
-        link.addEventListener('click', () => {
-            menu.classList.remove('open');
-        });
-    });
-</script>
+
 <?php if ($isAdmin): ?>
     <a href="index.php?page=add" class="add-book-btn" title="Ajouter un livre">+</a>
 <?php endif; ?>

@@ -1,5 +1,5 @@
 <?php
-include '../inc/check_admin.php';
+include 'inc/check_admin.php';
 
 if (isset($_GET['id'])) {
     $user_id = (int)$_GET['id'];

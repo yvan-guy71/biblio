@@ -1,6 +1,5 @@
-
 <?php
-// DB included by index.php
+include './inc/connexion.php';
 
 $message = '';
 

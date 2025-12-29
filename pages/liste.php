@@ -1,6 +1,6 @@
 <?php
 // DB included by index.php
-include '../inc/check_admin.php';
+include 'inc/check_admin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,13 +9,19 @@ include '../inc/check_admin.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>liste des livres</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+
         table {
             width: 100%;
             border-collapse: collapse;
         }
+        footer {
+        margin-top: 40px;  /* Ajoute de l'espace au-dessus du footer */
+        clear: both; 
+        }
         th, td {
-            padding: 8px 12px;
+            padding: 12px;
             text-align: left;
             color: white;
         }
@@ -23,12 +29,18 @@ include '../inc/check_admin.php';
             color: black;
             background-color: #f2f2f2;
         }
-        td a {
+        td {
             text-decoration: none;
             color: #fff;
             padding: 5px 10px;
             border-radius: 4px;
             margin-right: 5px;
+        }
+        tr {
+            height: 50%;
+        }
+        h3 {
+            color: #fff;
         }
         .btn-edit {
             background-color: #4CAF50;
@@ -48,7 +60,8 @@ include '../inc/check_admin.php';
             padding: 10px 15px;
             text-decoration: none;
             border-radius: 4px;
-            display: inline-block;
+            width: 200px;
+            margin: 0 auto;
         }
         .btn-add:hover {
             background-color: #0b7dda;
@@ -56,11 +69,19 @@ include '../inc/check_admin.php';
         nav ul li a {
             color: white;
         }
+        a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
-    <?php include './inc/header.php'; ?>
+<?php include 'inc/header.php'; ?>
     <h1>Listes de livres</h1>
+    <div style="overflow-y: auto; padding-bottom: 300px; margin-top: 20px;">
     <table border="1">
         <thead>
         <tr>
@@ -74,6 +95,8 @@ include '../inc/check_admin.php';
             <th>Actions</th>
         </tr>
         </thead>
+        <tbody>
+        
         <?php
         $sql = "SELECT * FROM livres";
         $result = $con->query($sql);
@@ -100,30 +123,16 @@ include '../inc/check_admin.php';
                 echo "</tr>";
             }
         } else {
-            echo "<tr><td colspan='8'>Aucun livre trouvé</td></tr>";
+            echo "<tr><td colspan='1'>Aucun livre trouvé</td></tr>";
         }
         ?>
-    </table><br>
+    </table>
+    </div>
+    <div style="display: flex; padding-top: 20px; justify-content: center;">
     <a href="index.php?page=add" class="btn-add">Ajouter un Livre</a>
     <br><br>
     <a href="index.php?page=gestion_users" class="btn-add">Gérer les Utilisateurs</a>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        a {
-            text-decoration: none;
-            color: black;
-        }
-    </style>
-<?php include './inc/footer.php'; ?>
+    </div>
+<?php include 'inc/footer.php'; ?>
 </body>
 </html>

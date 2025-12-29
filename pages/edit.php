@@ -1,5 +1,5 @@
 <?php 
-include '../inc/check_admin.php';
+include 'inc/check_admin.php';
 // Connection already included in index.php
 $id = $_GET['id'];
 $sql = "SELECT * FROM livres WHERE id = $id";
@@ -13,8 +13,47 @@ $result = $con->query($sql);
     <title>Edition du livre</title>
     <link rel="stylesheet" href="style.css">
 </head>
+<style>
+    form {
+        width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f0f8ff57 ;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        color: #fff;
+    }
+    input[type="text"], input[type="number"], textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    button {
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    @media (max-width: 600px) {
+        form {
+            width: 90%;
+            margin: 10px auto;
+            padding: 15px;
+        }
+    }
+</style>
 <body>
-    <?php include '../inc/header.php'; ?>
+    <?php include 'inc/header.php'; ?>
     <h1>Modifier le livre</h1>
     <?php
     if ($result->num_rows > 0) {
@@ -44,6 +83,6 @@ $result = $con->query($sql);
     }
     ?>
 
-<?php include '../inc/footer.php'; ?>
+<?php include 'inc/footer.php'; ?>
 </body>
 </html>

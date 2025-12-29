@@ -32,6 +32,7 @@ $stmt->close();
 <html lang="fr">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ma Liste de Lecture</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -54,6 +55,7 @@ $stmt->close();
 <?php if (empty($wishlist_books)): ?>
     <p style="text-align:center">Votre liste est vide.</p>
 <?php else: ?>
+    <div style="overflow-x: auto;">
     <table style="width:90%;margin:20px auto; border-collapse:collapse; border: 2px solid #fff; color: #fff;">
         <tr><th>Titre</th><th>Auteur</th><th>Date emprunt</th><th>Date retour</th><th>Action</th></tr>
         <?php foreach ($wishlist_books as $book): ?>
@@ -71,6 +73,7 @@ $stmt->close();
             </tr>
         <?php endforeach; ?>
     </table>
+    </div>
 <?php endif; ?>
 <?php include 'inc/footer.php'; ?>
 </body>

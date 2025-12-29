@@ -1,17 +1,26 @@
+# Utiliser une image officielle Apache + PHP
 FROM php:8.2-apache
 
-# Install mysqli extension
-RUN docker-php-ext-install mysqli
+# Activer uniquement le MPM prefork (compatible avec mod_php)
+RUN a2dismod mpm_event mpm_worker \
+    && a2enmod mpm_prefork
 
-# Force remove conflicting MPM modules and enable prefork
-RUN rm -f /etc/apache2/mods-enabled/mpm_*.load && \
-    a2enmod mpm_prefork
+# Activer les modules Apache utiles
+RUN a2enmod rewrite \
+    && a2enmod headers
 
-# Copy application code
+# Installer extensions PHP nécessaires (exemple : mysqli, pdo_mysql)
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Copier ton code dans le conteneur
 COPY . /var/www/html/
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html/
+# Définir les permissions pour Apache
+RUN chown -R www-data:www-data /var/www/html/ \
+    && chmod -R 755 /var/www/html/
 
-# Expose port 80
+# Exposer le port 80
 EXPOSE 80
+
+# Lancer Apache en mode foreground
+CMD ["apache2-foreground"]
