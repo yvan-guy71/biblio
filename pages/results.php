@@ -7,58 +7,91 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-.affichage {
-    width: 500px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f0f8ff57 ;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    text-align: left;
-    gap: 10px;
-    font-size: 1.1rem;
-    color: #fff;
-}
-
-.btn-details {
-    justify-content: center;
-    display: flex;
-    width: 200px;
-    margin: 10px auto 30px auto;
-    padding: 10px 20px; 
-    background-color: #007bffb0;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.btn-details:hover {
-    background-color: #0057b3b7;
-}
-span {
-    display: flex;
-    font-weight: bold;
-    justify-content: center;
-    text-align: center;
-}
-img {
-    margin-top: 10px;
-    display: block;
-    margin: 0 auto;
-}
-@media (max-width: 600px) {
-    .affichage {
-        width: 90%;
-        margin: 10px auto;
-        padding: 15px;
-        font-size: 1rem;
-    }
-    .btn-details {
-        width: 80%;
-    }
-}
-</style>
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .result-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        .result-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .result-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .result-author {
+            color: #ddd;
+            margin-bottom: 10px;
+        }
+        .result-description {
+            color: #ccc;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            line-clamp: 3;
+            overflow: hidden;
+        }
+        .btn-details {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .btn-details:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+        .no-results {
+            text-align: center;
+            color: #fff;
+            font-size: 1.2em;
+            margin-top: 50px;
+        }
+        h3 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+        @media (max-width: 600px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+                padding: 0 10px;
+            }
+            .result-card {
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <?php include './inc/header.php'; ?>
@@ -79,19 +112,24 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
     if ($result->num_rows > 0) {
 
         echo "<h3>Résultats pour : " . htmlspecialchars($recherche) . "</h3>";
+        echo "<div class='results-grid'>";
 
         while ($row = $result->fetch_assoc()) {
-            echo "<div class='affichage'>";
-            echo "<strong>Titre : " . "</strong> ". htmlspecialchars($row['titre'])."<br>";
-            echo "<strong>Auteur : </strong> ". htmlspecialchars($row['auteur']) . "<br><br>";
-            echo "<strong>Description : </strong> ". htmlspecialchars($row['description']);
-            echo "<br><br><span>Image <br></span>";
-            echo "<img src='images/" . htmlspecialchars($row['image']) . "' alt='Image' width='100' style='margin-top:10px;'><br>";
+            echo "<div class='result-card fade-in'>";
+            if (!empty($row['image'])) {
+                echo "<img src='images/" . htmlspecialchars($row['image']) . "' alt='Image du livre' class='result-image'>";
+            } else {
+                echo "<div class='result-image' style='background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: #fff;'>Pas d'image</div>";
+            }
+            echo "<div class='result-title'>" . htmlspecialchars($row['titre']) . "</div>";
+            echo "<div class='result-author'>Par " . htmlspecialchars($row['auteur']) . "</div>";
+            echo "<div class='result-description'>" . htmlspecialchars($row['description']) . "</div>";
+            echo "<a href='index.php?page=details&id=" . $row['id'] . "' class='btn-details'><i class='fas fa-info-circle'></i> Détails</a>";
             echo "</div>";
-            echo '<a href="index.php?page=details&id=' . $row['id'] . '" class="btn-details">Détails du livre</a>';
         }
+        echo "</div>";
     } else {
-        echo "<p style='text-align:center;'>Aucun livre trouvé pour : " . htmlspecialchars($recherche) . "</p>";
+        echo "<div class='no-results'>Aucun livre trouvé pour : " . htmlspecialchars($recherche) . "</div>";
     }
 } else {
     echo "<p style='text-align:center;'>Veuillez entrer un mot-clé pour rechercher.</p>";

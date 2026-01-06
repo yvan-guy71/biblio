@@ -37,15 +37,65 @@ $stmt->close();
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        th, td {
-            padding: 8px 12px;
-            text-align: left;
-            color: white;
-            border: 2px solid #fff;
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
         }
-        th {
-            color: black;
-            background-color: #f2f2f2;
+        .wishlist-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .wishlist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        .wishlist-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .wishlist-author {
+            color: #ddd;
+            margin-bottom: 10px;
+        }
+        .wishlist-dates {
+            color: #bbb;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        .wishlist-actions {
+            text-align: center;
+        }
+        .btn-remove {
+            background: linear-gradient(135deg, #f44336, #da190b);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-remove:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+        }
+        .empty-wishlist {
+            text-align: center;
+            color: #fff;
+            font-size: 1.2em;
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -53,26 +103,25 @@ $stmt->close();
 <?php include 'inc/header.php'; ?>
 <h1 style="text-align:center;margin-top:18px">Ma Liste de Lecture</h1>
 <?php if (empty($wishlist_books)): ?>
-    <p style="text-align:center">Votre liste est vide.</p>
+    <div class="empty-wishlist">Votre liste est vide.</div>
 <?php else: ?>
-    <div style="overflow-x: auto;">
-    <table style="width:90%;margin:20px auto; border-collapse:collapse; border: 2px solid #fff; color: #fff;">
-        <tr><th>Titre</th><th>Auteur</th><th>Date emprunt</th><th>Date retour</th><th>Action</th></tr>
+    <div class="wishlist-grid">
         <?php foreach ($wishlist_books as $book): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($book['titre']); ?></td>
-                <td><?php echo htmlspecialchars($book['auteur']); ?></td>
-                <td><?php echo htmlspecialchars($book['date_emprunt'] ?? ''); ?></td>
-                <td><?php echo htmlspecialchars($book['date_retour'] ?? ''); ?></td>
-                <td>
-                    <form method="post" action="index.php?page=remove_from_list" style="display:inline;background:none;box-shadow:none;padding:0;margin:0;">
+            <div class="wishlist-card fade-in">
+                <div class="wishlist-title"><?php echo htmlspecialchars($book['titre']); ?></div>
+                <div class="wishlist-author">Par <?php echo htmlspecialchars($book['auteur']); ?></div>
+                <div class="wishlist-dates">
+                    <strong>Emprunté le:</strong> <?php echo htmlspecialchars($book['date_emprunt'] ?? 'N/A'); ?><br>
+                    <strong>Retour prévu:</strong> <?php echo htmlspecialchars($book['date_retour'] ?? 'N/A'); ?>
+                </div>
+                <div class="wishlist-actions">
+                    <form method="post" action="index.php?page=remove_from_list" style="display:inline;">
                         <input type="hidden" name="livre_id" value="<?php echo (int)$book['livre_id']; ?>">
-                        <button type="submit" style="background:red;padding:5px 10px;">Retirer</button>
+                        <button type="submit" class="btn-remove" onclick="return confirm('Êtes-vous sûr de vouloir retirer ce livre de votre liste ?')"><i class="fas fa-times"></i> Retirer</button>
                     </form>
-                </td>
-            </tr>
+                </div>
+            </div>
         <?php endforeach; ?>
-    </table>
     </div>
 <?php endif; ?>
 <?php include 'inc/footer.php'; ?>

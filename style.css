@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +8,7 @@
 
 
 html, body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -27,16 +29,18 @@ body::before {
     background-position: center top;
     background-size: cover;
     background-attachment: fixed;
-    filter: blur(8px) brightness(0.6);
+    filter: blur(6px) brightness(0.6);
     transform: scale(1.05);
     z-index: -1;
 }
 header {
-    background-color: rgba(33, 51, 49, 0.757);
+    background: #035e2cd2;
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 40px 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .container {
@@ -59,16 +63,27 @@ ul {
 }
 
 li a {
-    color: #e6f0ef;
-    padding: 10px;
+    color: #ffffff;
+    padding: 12px 20px;
     text-decoration: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+li a:hover, li a:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    outline: none;
 }
 
 
 h3 {
     font-size: 2rem;
     padding-left: 50px;
-    color: white;   
+    color: white;
+    font-weight: 700;
 }
 
 
@@ -92,17 +107,20 @@ form {
 }
 
 form input {
-    color: rgb(245, 240, 240);
-    padding: 10px;
+    color: #333;
+    padding: 12px 20px;
     width: 250px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    background-color: #ffffff42;
-    width: 300px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 form input:hover {
-    background-color: #ffffff7a;
+    border-color: #667eea;
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
 }
 
 form input[type="search"] {
@@ -112,21 +130,26 @@ form input[type="search"] {
 }
 
 form button {
-    padding: 10px 20px;
+    padding: 12px 24px;
     border: none;
-    border-radius: 20px;
-    background-color: #163f2ffd;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 form ::placeholder {
-    color: #fff;
+    color: #333;
     font-style: italic;
 }
 
 form button:hover {
-    background-color: #173f27a8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -164,9 +187,9 @@ form button:hover {
 footer {
     color: #fff;
     margin-top: auto;
-    background-color: rgba(33, 51, 49, 0.757);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     text-align: center;
-   
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
 .footer-content {
     max-width: 1200px;
@@ -361,4 +384,40 @@ nav ul li {
         justify-content: center;
         width: 100%;
     }
+}
+
+/* Animations pour plus d'intuitivité */
+.fade-in {
+    animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Styles supplémentaires pour les boutons d'action */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

@@ -11,60 +11,114 @@ include 'inc/check_admin.php';
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-
-        table {
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .book-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        .book-image {
             width: 100%;
-            border-collapse: collapse;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
         }
-        footer {
-        margin-top: 40px;  /* Ajoute de l'espace au-dessus du footer */
-        clear: both; 
+        .book-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
         }
-        th, td {
-            padding: 12px;
-            text-align: left;
+        .book-author {
+            color: #ddd;
+            margin-bottom: 10px;
+        }
+        .book-description {
+            color: #ccc;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            line-clamp: 3;
+            overflow: hidden;
+        }
+        .book-details {
+            color: #bbb;
+            font-size: 0.8em;
+            margin-bottom: 15px;
+        }
+        .book-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .btn-edit, .btn-delete {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-edit {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
             color: white;
         }
-        th {
-            color: black;
-            background-color: #f2f2f2;
+        .btn-edit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
         }
-        td {
+        .btn-delete {
+            background: linear-gradient(135deg, #f44336, #da190b);
+            color: white;
+        }
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+        }
+        .btn-add {
+            background: linear-gradient(135deg, #2196F3, #0b7dda);
+            color: white;
+            padding: 12px 24px;
             text-decoration: none;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 4px;
-            margin-right: 5px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 20px auto;
         }
-        tr {
-            height: 50%;
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+        }
+        .actions-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        footer {
+            margin-top: 40px;
+            clear: both;
         }
         h3 {
             color: #fff;
-        }
-        .btn-edit {
-            background-color: #4CAF50;
-        }
-        .btn-edit:hover {
-            background-color: #45a049;
-        }
-        .btn-delete {
-            background-color: #f44336;
-        }
-        .btn-delete:hover {
-            background-color: #da190b;
-        }
-        .btn-add {
-            background-color: #2196F3;
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 4px;
-            width: 200px;
-            margin: 0 auto;
-        }
-        .btn-add:hover {
-            background-color: #0b7dda;
         }
         nav ul li a {
             color: white;
@@ -72,66 +126,46 @@ include 'inc/check_admin.php';
         a {
             color: white;
             text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            display: inline-block;
         }
     </style>
 </head>
 <body>
 <?php include 'inc/header.php'; ?>
     <h1>Listes de livres</h1>
-    <div style="overflow-y: auto; padding-bottom: 300px; margin-top: 20px;">
-    <table border="1">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Auteur</th>
-            <th>Titre</th>
-            <th>Description</th>
-            <th>Maison d'édition</th>
-            <th>Nombre d'exemplaires</th>
-            <th>Image</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        
+    <div class="books-grid">
         <?php
         $sql = "SELECT * FROM livres";
         $result = $con->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row['id'] . "</td>";
-                echo "<td>" . htmlspecialchars($row['auteur']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['titre']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['description']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['maison_edition']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['nombre_exemplaire']) . "</td>";
-                echo "<td>";
+                echo '<div class="book-card fade-in">';
                 if (!empty($row['image'])) {
-                    echo "<img src='images/" . htmlspecialchars($row['image']) . "' alt='Image' width='100'>";
+                    echo '<img src="images/' . htmlspecialchars($row['image']) . '" alt="Image du livre" class="book-image">';
                 } else {
-                    echo "Pas d'image";
+                    echo '<div class="book-image" style="background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: #fff;">Pas d\'image</div>';
                 }
-                echo "</td>";
-                echo "<td>";
-                echo "<a href='index.php?page=edit&id=" . $row['id'] . "' class='btn-edit'>Modifier</a> ";
-                echo "<a href='index.php?page=delete&id=" . $row['id'] . "' class='btn-delete'>Supprimer</a>";
-                echo "</td>";
-                echo "</tr>";
+                echo '<div class="book-title">' . htmlspecialchars($row['titre']) . '</div>';
+                echo '<div class="book-author">Par ' . htmlspecialchars($row['auteur']) . '</div>';
+                echo '<div class="book-description">' . htmlspecialchars($row['description']) . '</div>';
+                echo '<div class="book-details">';
+                echo '<strong>Éditeur:</strong> ' . htmlspecialchars($row['maison_edition']) . '<br>';
+                echo '<strong>Exemplaires:</strong> ' . htmlspecialchars($row['nombre_exemplaire']);
+                echo '</div>';
+                echo '<div class="book-actions">';
+                echo '<a href="index.php?page=edit&id=' . $row['id'] . '" class="btn-edit"><i class="fas fa-edit"></i> Modifier</a>';
+                echo '<a href="index.php?page=delete&id=' . $row['id'] . '" class="btn-delete" onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer ce livre ?\')"><i class="fas fa-trash"></i> Supprimer</a>';
+                echo '</div>';
+                echo '</div>';
             }
         } else {
-            echo "<tr><td colspan='1'>Aucun livre trouvé</td></tr>";
+            echo '<div class="book-card"><p>Aucun livre trouvé</p></div>';
         }
         ?>
-    </table>
     </div>
-    <div style="display: flex; padding-top: 20px; justify-content: center;">
-    <a href="index.php?page=add" class="btn-add">Ajouter un Livre</a>
-    <br><br>
-    <a href="index.php?page=gestion_users" class="btn-add">Gérer les Utilisateurs</a>
+    <div class="actions-container">
+        <a href="index.php?page=add" class="btn-add"><i class="fas fa-plus"></i> Ajouter un Livre</a>
+        <br><br>
+        <a href="index.php?page=gestion_users" class="btn-add"><i class="fas fa-users"></i> Gérer les Utilisateurs</a>
     </div>
 <?php include 'inc/footer.php'; ?>
 </body>

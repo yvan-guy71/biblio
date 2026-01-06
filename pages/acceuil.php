@@ -28,7 +28,7 @@
             max-width: 800px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 30px;
+            gap: 10px;
             justify-items: center;
             margin: 20px auto;
         }
